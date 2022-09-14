@@ -1,3 +1,3 @@
 module.exports.default = () => {
-	console.log("Hi!")
+  console.log("Hi!")
 }
