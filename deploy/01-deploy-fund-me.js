@@ -18,7 +18,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
   const args = [ethUsdPriceFeedAddress]
 
-  const fundMe = await deploy("Fundme", {
+  const fundMe = await deploy("FundMe", {
     contract: "FundMe",
     from: deployer,
     args,
