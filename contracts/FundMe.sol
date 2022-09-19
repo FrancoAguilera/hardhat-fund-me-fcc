@@ -23,7 +23,7 @@ contract FundMe {
   // could we make this constant ?
   address public immutable i_owner;
   uint256 public constant MINIMUM_USD = 50 * 10**18;
-  AggregatorV3Interface public priceFeed;
+  AggregatorV3Interface public s_priceFeed;
 
   // state modifiers
   modifier onlyOwner() {
@@ -32,9 +32,9 @@ contract FundMe {
     _;
   }
 
-  constructor(address priceFeedAddress) {
+  constructor(address s_priceFeedAddress) {
     i_owner = msg.sender;
-    priceFeed = AggregatorV3Interface(priceFeedAddress);
+    s_priceFeed = AggregatorV3Interface(s_priceFeedAddress);
   }
 
   fallback() external payable {
@@ -51,7 +51,7 @@ contract FundMe {
    */
   function fund() public payable {
     require(
-      msg.value.getConversionRate(priceFeed) >= MINIMUM_USD,
+      msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD,
       "You need to spend more ETH!"
     );
     addressToAmountFunded[msg.sender] += msg.value;
